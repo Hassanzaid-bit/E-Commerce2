@@ -1,0 +1,84 @@
+{% include 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="index-container">
+    <div class="header">
+       {% include 'common/header.html' %}
+    </div>
+    <div class="main-content container">    
+        <div class="hero-section">
+           
+        </div>
+        <div class="hero-content">
+            <div class="content1">
+                <div class="flex-content">
+                    <h3>Computer Systems</h3>
+                    <img src="{% static 'img/comp-systems.jpg' %}" alt="">
+                    <a href="{% url 'computers:systems' %}">Shop now</a>
+                </div>
+            </div>
+            <div class="content1">
+                <div class="flex-content">
+                    <h3>Components</h3>
+                    <img src="{% static 'img/components.jpg' %}" alt="">
+                    <a href="{% url 'components:components' %}">Shop now</a>
+                </div> 
+             </div>
+             <div class="sign-up-card">
+                 {% if user.is_authenticated %}
+                 <div class="flex-content">
+                    <h1>BEST COMPUTER DEALS IN TOWN</h1> 
+                 </div>
+                 {% else %}
+                 <div class="flex-content">
+                    <h1>Sign in for <span class="best">best</span>  experience</h1>
+                    <button type="button" class="btn"> <a href="{% url 'account:login' %}"> Sign in</a></button>
+                    <p>New to Computerphile <a href="{% url 'account:register' %}">Sign up</a></p>
+                 </div>
+                 {% endif %}
+             </div>
+        </div>
+        <div class="best-deals">
+            <div class="header">
+                <h3>TODAY'S BEST DEALS</h3>
+            </div>
+            <div class="content">
+                {% for computer in computers %}
+                <div class="item">
+                    {% if computer.image %}
+                    <a href="{% url 'computers:product-details' pk=computer.id %}"> <img src="{{ computer.image.url}}" alt=""></a>  
+                    {% endif %}
+                    <p>{{ comuter.Brand }}{{ computer.series }} {{ computer.model }} {{ computer.memory }} {{ computer.cpu }}</p>
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                   
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="sell" style="display: none;">
+            <div class="left-content">
+                <h2>Sell on Computerphile</h2>
+                <p>More than half the units sold in our stored are independent sellers</p>
+                 <a href="{% url 'account:login' %}"><button type="button" class="btn">Sign in</button></a>
+            </div>
+            <img src="{% static 'img/sell.png' %}" alt="">
+        </div>
+    </div>  
+
+    <div class="footer">
+        {% include "common/footer.html" %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+

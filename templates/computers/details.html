@@ -1,0 +1,109 @@
+{% include 'base.html' %}
+{% load static %}
+
+<div id="details-container">
+    <div class="header">
+        {% include "common/header.html" %}
+    </div>
+    <div class="checkout-process">
+        <div>
+            <h4>1</h4>
+            <p>Shopping cart</p>
+        </div>
+        <div>
+            <h4>2</h4>
+            <p>Shipping details</p>
+        </div>
+        <div>
+            <h4>3</h4>
+            <p>Payment options</p>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="shipping">
+            <h1>Shipping details</h1>
+            <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6 first">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="First name">
+                  </div>
+                  <div class="form-group col-md-6 second">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group">
+                  <label for="inputAddress2">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6 first">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                      <option selected>Choose...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="side-content">
+        <h4>Cart</h4>
+        <div class="side-content-cart-abstract">
+            <div class="product">
+                <img src="{% static 'img/product-details.jpg' %}" alt="">
+                <div>
+                    <h5>Laptop envy 500Tb</h5>
+                    <h5>20000</h5>
+                </div>
+            </div>
+            <div class="product">
+                <img src="{% static 'img/product-details.jpg' %}" alt="">
+                <div>
+                    <h5>Laptop envy 500Tb</h5>
+                    <h5>20000</h5>
+                </div>
+            </div>       
+        </div> 
+        <div class="summary">
+            <h4>Summary</h4>
+            <div>
+              <div class="summary-details">
+                <div class="summary-details-div">
+                  <h5>Subtotal</h5>
+                  <h5>9000</h5>
+                </div>
+                <div class="summary-details-div">
+                  <h5>Taxes</h5>
+                  <h5>0</h5>
+                </div>
+              </div>
+              <h4>Total 60000</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="test">
+     
+      <button type="button" class="btn btn-secondary btn-lg"><i class="bi bi-arrow-left"></i>Back </button>
+      <button type="button" class="btn btn-primary btn-lg"><a href="{% url 'computers:payment' %}">CONTINUE <i class="bi bi-arrow-right"></i></a> </button>
+    </div>
+    
+    <footer>
+        {% include "common/footer.html" %}
+    </footer>
+</div>

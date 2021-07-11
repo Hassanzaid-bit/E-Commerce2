@@ -1,0 +1,232 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="product-details-container">
+    <div id="overlay"></div>
+    <div >
+        {% include "common/header.html" %}
+    </div>
+    <div class="sub-navigation">
+        <div class="sub-nav-top-content">
+            <p><a href="{% url 'computers:home' %}"> HOME</a> ><em> <a href="{% url 'computers:systems' %}">Computer systems </a> </em> > <em>2 in 1 laptops</em>><em>1234567</em> </p>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="product-description">
+            <div class="product-description-content">
+                <img src="{{ computer.image.url}}" alt="">
+                <div>
+                    <h3>ASUS TUF Gaming A15 - 15.6" FHD - AMD Ryzen 5 4600H - GeForce GTX 1660 Ti - 8 GB DDR4 - 512 GB SSD - RGB Keyboard - Windows 10 Home - Bonfire Black - Gaming Laptop (FA506IU-NB53)</h3>
+                    <div class="review" >
+                        <div class="star-ratings">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <a href="">Write a review</a>
+                    </div>
+                  
+                    <ul>
+                        <li>NVIDIA GeForce GTX 1660 Ti 6 GB GDDR6 Graphics (Base: 1455 MHz, Boost: 1590 MHz, TDP: 80W)</li>
+                        <li>AMD Ryzen 5 4600H Processor</li>
+                        <li>15.6" FHD (1920 x 1080) 144 Hz IPS-Type display</li>
+                        <li>8 GB DDR4 3200 MHz RAM</li>
+                        <li>512 GB PCIe NVMe M.2 SSD</li>
+                        <li>Windows 10 Home</li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="tabbed-content">
+                <ul class="nav nav-pills" id="tabbed-pills">
+                    <li class="active"><a data-toggle="pill" href="#specs">Specs</a></li>
+                    <li><a data-toggle="pill" href="#reviews">Reviews</a></li>
+                  
+                </ul>
+                <div class="tab-content">
+                    <div  class="tab-pane fade in active">
+                 
+                        <div>
+                            <h3>Model</h3>
+                            <table class="table">
+                                <tbody>
+                                    <tr id="row">
+                                    <th scope="row">Brand</th>
+                                    <td>{{ computer.Brand }}</td>
+                                    </tr>
+                                    <tr id="row">
+                                    <th scope="row">Model</th>
+                                    <td>{{ computer.model }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <h3>Quick Info</h3>
+                            <table class="table">
+                                <tbody>
+                                    <tr id="row">
+                                        <th scope="row">Operating System <button onclick="osSpecs()" class="btn" id="osButton"><i class="bi bi-question-circle-fill " ></i></button> 
+                                            <div class="card specs">
+                                                <div class="card-body">
+                                                  <p class="card-text">{{os.description}}</p>
+                                                </div>
+                                              </div>
+                                        </th>
+                                        <td>Windows 10 Home 64-bit</td>
+                                    </tr>
+                                    <tr id="row">
+                                        <th scope="row">CPU <button onclick="cpuSpecs()" class="btn" id="cpuButton"><i class="bi bi-question-circle-fill show-specs2" ></i></i></button>  
+                                            <div class="card specs" >
+                                                <div class="card-body">
+                                                  <p class="card-text" id=" cpu-text">{{cpu.description}}</p>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td>{{ computer.cpu }}</td>
+                                    </tr>
+                                    <tr id="row">
+                                        <th scope="row">Screen</th>
+                                        <td>{{ computer.screen_size }}</td>
+                                    </tr>
+                                    <tr id="row">
+                                        <th scope="row">Memory  <button onclick="memorySpecs()" class="btn" id="memoryButton"> <i class="bi bi-question-circle-fill" id="show-specs2"></i></button>  
+                                            <div class="card specs">
+                                                <div class="card-body">
+                                                  <p class="card-text">{{memory.description}}</p>
+                                                </div>
+                                              </div>
+                                        </th>
+                                        <td>{{ computer.memory }}</td>
+                                    </tr>
+                                    <tr id="row">
+                                        <th scope="row">Storage  <button onclick="storageSpecs()" class="btn" id="storageButton">  <i class="bi bi-question-circle-fill" id="show-specs2"></i></button>  
+                                            <div class="card specs">
+                                                <div class="card-body">
+                                                  <p class="card-text">{{ storage.description }}</p>
+                                                </div>
+                                              </div>
+                                        </th>
+                                        <td>512 GB M.2 NVMe PCIe 3.0 SSD</td>
+                                    </tr>
+                                    <tr id="row">
+                                        <th scope="row">Graphics Card   <button onclick="graphicsSpecs()" class="btn" id="graphicsButton">  <i class="bi bi-question-circle-fill" id="show-specs2"></i></button>  
+                                            <div class="card specs">
+                                                <div class="card-body">
+                                                  <p class="card-text">{{graphics.description}}</p>
+                                                </div>
+                                              </div>
+                                        </th>
+                                        <td>GeForce GTX 1660 Ti</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                    </div>
+                    <div id="reviews" class="tab-pane fade">
+                        <h3>Reviews</h3>
+                      {% with computer.reviews.count as total_reviews %}
+                        <h2>{{ total_reviews }} review{{total_reviews|pluralize}}</h2>
+                      {% endwith %}
+
+                      {% for review in computer.reviews.all %}
+                        <div class="review">
+                          <p>Review {{ forloop.counter }} by {{ review.name }}
+                            {{ review.created }}
+                          </p>
+                          {{ review.body|linebreaks }}
+                        </div>
+                      {% empty %}
+                        <p>There are no reviews yet</p>
+                      {% endfor %}
+
+                      {% if new_review %}
+                        <h2>Your comment has been added</h2>
+                      {% else %}
+                        <h2>Add a new review</h2>
+                        <form action="" method="post">
+                            {{ review_form.as_p }}
+                            {% csrf_token %}
+                            <p><Input type="submit" value="Add comment"></Input></p>
+                        </form>
+                      {% endif %}
+
+                    </div>
+                </div>
+                  
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <div class="add-to-cart-slide-menu" id="slide-menu"  >
+                <div class="header">
+                    <h5> <span><i class="bi bi-check-circle"></i></span> ITEM HAS BEEN ADDED TO YOUR CART</h5>
+                    <span id="close-nav"> X </span>
+                </div>
+                <div class="content">
+                    <img src="{{ computer.image.url }}" alt="">
+                    <h5>ASUS TUF Gaming A15 - 15.6" FHD - AMD Ryzen 5 4600H - GeForce GTX 1660 Ti - 8 GB DDR4 - 512 GB SSD - RGB Keyboard - Windows 10 Home - Bonfire Black - Gaming Laptop (FA506IU-NB53)</h5>
+                    
+                </div>
+                <div class="bottom-content">
+                    <p>Cart subtotal(4 items): <span class="sub-total" >KSHS 20000</span>  </p>
+                    <div class="buttons">
+                        <button type="button" class="btn btn-default" id="continue-shopping">CONTINUE SHOPPING</button>
+                        <button type="button" class="btn btn-warning"> <a href="{% url 'cart:cart_detail' %}">VIEW CART & CHECKOUT</a> </button>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="add-to-cart__price">
+                <p>Sold by <span>Computerphile</span></p>
+                <h3>KSH{{ computer.price }}</h3>
+                <form action="{% url 'cart:cart_add' computer.id %}" method="POST">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <button type="submit" value="Add to cart" class="btn btn-warning" id="add-to-cart-button">  Add to Cart</button>
+                </form>              
+            </div>
+            <div class="reviews">
+                <div class="rating-and-sub-heading">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <h6>TOP FAVOURABLE REVIEW</h6>
+                </div>
+                <p><span>Pros:</span> love the 144 hz. very noticeable
+                    I love custom features with Keyboard blacklists. Breathing RGB and Adjustments of color/pattern makes this equal to a chrome logitech keyboard. +1
+                    Great Battery adjustment w/ ease. (FN+Button)
+                    Insane CPU/GPU power.
+                    Love the Charger. Charged PC fully in 2~3 hours.</p>
+                <p><span>Cons:</span>Didnt enjoy the WSDA. Should come with nature black keys. Will be confusing
+                    PC didnt come Updated didnt notify me. Took me a minute since its been awhile since I got a laptop w/ a GPU (not integrated). In the end I took 2 blue screens and almost dropped 2 deus'es.
+                    Fans/Battery is a little loud but when ur abusing the power outtage w/ RGB/Battery/Quality then ya, but turn all this off and makes little ~ no noise with longer stability of a integrated AMD/Intel CPU and GPU</p>
+                
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% include "common/footer.html" %}
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>  
+</div>
+
+<script>
+    
+  
+</script>
+
+
+{% endblock %}

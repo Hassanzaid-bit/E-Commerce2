@@ -1,0 +1,118 @@
+{% include 'base.html' %}
+{% load static %}
+
+<div class="computers-page-container">
+    <div class="header">
+        {% include "common/header.html" %}
+    </div>
+    <div class="sub-navigation">
+        <div class="sub-nav-top-content">
+            <p><a href="{% url 'computers:home' %}"> HOME</a> ><em>Components</em></p>
+        </div>
+        <div class="sub-nav-bottom-content components">
+            <h3>COMPONENTS</h3>
+        </div>
+    </div>
+    <div class="cp main-content container">
+        
+
+        <div class="comp-systems-featured-items">
+            <h1>COMPONENTS FEATURED ITEMS</h1>
+            <div class="cs-flex-container">
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/AsusMotherboard.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description"> 
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/RAM.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description">
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/samsung-ssd.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description">
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/Western-digital-ssd.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description">
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/MSN-Motherboard.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description">
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+                <div class="cs-featured-items-content">
+                    <img src="{% static 'img/motherboard.jpg' %}" alt="">
+                    <div class="star-ratings">
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <div class="cs-description">
+                        <p>ABS Gladiator Gaming PC - Intel i7 10700F - GeForce RTX 3070 - 16GB DDR4 3000MHz - 1TB Intel M.2 NVMe SSD
+                        </p>
+                        <p>20,000</p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    <footer>
+        {% include "common/footer.html" %}
+    </footer>
+</div>

@@ -1,0 +1,73 @@
+{% include 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+ <div class="cart-container">
+    <div class="header">
+        {% include "common/header.html" %}
+    </div>
+    <div class="checkout-process">
+        <div>
+            <h4>1</h4>
+            <p>Shopping cart</p>
+        </div>
+        <div>
+            <h4>2</h4>
+            <p>Shopping details</p>
+        </div>
+        <div>
+            <h4>3</h4>
+            <p>Payment options</p>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="heading">
+            <h1>Shopping cart</h1>
+            <h5>Price</h5>
+        </div>
+        <!---->
+        {% for item in cart %}
+            {% with product=item.product %}
+        <div class="cart-item">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="">
+            {% endif %}
+            <div>
+                <p>{{ product.Brand}}{{ product.series }} {{ product.model }} {{ product.memory }}</p>            
+               
+                <div class="form-input" >
+                    <form action="{% url 'cart:cart_add' product.id %}" method="POST">
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.override }}
+                        <input type="submit" value="Update">
+                        {% csrf_token %}
+                    </form>
+                    <form action="{% url 'cart:cart_remove' product_id=product.id %}" method="POST">
+                        <input type="submit" value="Remove">
+                        {% csrf_token %}
+                    </form>
+               </div>  
+            </div>
+            <h4>{{ item.total_price }}</h4>
+        </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+    
+    <div class="side-content">
+        <div class="inner-container">
+            <h2>TOTAL</h2>
+            <div class="sub-total">
+                <h4>Sub-total</h4>
+                <h4>{{ cart.get_total_price }}</h4>
+            </div>
+            <button type="button" class="btn btn-primary btn-block"> <a href="{% url 'orders:order_create' %}"> CONTINUE <i class="bi bi-arrow-right"></i></a></button>
+        </div>
+    </div>
+    <footer class="footer">
+        {% include "common/footer.html" %}
+    </footer>
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="header">
+    {% include "common/header.html" %}
+</div>
+<h1>Logged out</h1>
+<p>You have been successfully logged out
+You can <a href="{% url 'account:login' %}">Log-in again</a>
+</p>
+{% endblock %}

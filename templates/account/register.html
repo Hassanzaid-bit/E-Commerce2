@@ -1,0 +1,16 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="register">
+    <div class="register card">
+        <h1>Create an account</h1>
+        <form method="post">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Create my account" class="btn btn-primary btn-block"></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

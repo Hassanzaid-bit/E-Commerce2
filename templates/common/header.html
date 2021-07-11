@@ -1,0 +1,55 @@
+
+<nav class="main-nav">
+    <div class="top-nav">
+        <h1> <a href="{% url 'computers:home' %}">Computer<span class="small">Phile</span></a> </h1>
+        <div class="input-group">
+            <div class="form-outline">
+              <input type="search" id="form1" class="form-control" placeholder="Search store"/>
+            </div>
+            <button type="button" class="btn ">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+          <div class="right-side">
+            <div class="user-icon">
+                <i class="bi bi-person"></i>
+                {% if request.user.is_authenticated %}
+                <div class="text-content">
+                    <h5>Welcome {{ request.user.first_name }}</h5>
+                    <h5><a href="{% url 'account:logout' %}">Logout</a></h5>
+                </div>
+                {% else %}
+                <div class="text-content">
+                  <h5>Welcome</h5>
+                  <h5><a href="{% url 'account:login' %}">Sign in/Register</a></h5>
+              </div>
+                {% endif %}
+              </div>
+              <div class="cart">
+                {% with total_items=cart|length %}
+                  {% if total_items > 0 %}
+                    <a href="{% url 'cart:cart_detail' %}" class="cart-link">
+                      <i class="bi bi-cart2"></i>
+                      <div class="cart-items">{{ total_items }}</div>
+                    </a>
+                  {% else %}
+                    <a href="{% url 'cart:cart_detail' %}" class="cart-link">
+                      <i class="bi bi-cart2"></i>
+                    </a>
+                  {% endif %}
+
+                {% endwith %}
+              </div>
+          </div>  
+        </div>
+
+        <div class="bottom-nav" >
+            <div class="hamburger">
+                <i class="bi bi-list"></i>
+                <h5>ALL</h5>
+            </div>
+
+            <p>Sell</p>
+        </div>
+</nav>
+

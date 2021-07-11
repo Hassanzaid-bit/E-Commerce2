@@ -1,0 +1,89 @@
+{% include 'base.html' %}
+{% load static %}
+
+<div id="payment-container">
+    <div class="header">
+        {% include "common/header.html" %}
+    </div>
+    <div class="checkout-process">
+        <div>
+            <h4>1</h4>
+            <p>Shopping cart</p>
+        </div>
+        <div>
+            <h4>2</h4>
+            <p>Shipping details</p>
+        </div>
+        <div>
+            <h4>3</h4>
+            <p>Payment options</p>
+        </div>
+    </div>
+    <div class="payment">
+        <div class="radio-buttons">
+            <input type="radio" name="radiobutton" value="mastercard" checked> <img src="{% static  'img/mastercard.png'%}" alt="" width="177px"></label>
+            <input type="radio" name="radiobutton" value="mpesa"> <img src="{% static  'img/mpesa.png'%}" alt=""></label>    
+        </div>
+      
+        <div class="mastercard payment-form">
+            <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Card Number</label>
+                    <input type="text" class="form-control" id="" placeholder="Card number">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Card Holder</label>
+                    <input type="text" class="form-control" id="inputPassword4" placeholder="Card holder">
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputCity">Expiry Date</label>
+                    <select id="Month" class="form-control">
+                        <option selected>Month</option>
+                        <option>...</option>
+                      </select>
+
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="inputState">Year</label>
+                    <select id="Year" class="form-control">
+                      <option selected>Year</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">CCV</label>
+                    <input type="text" class="form-control" id="inputZip">
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">CONFIRM PAYMENT</button>
+
+              </form>
+        </div>
+
+        <div class="mpesa payment-form">
+          <form action="">
+            <label for="">Mpesa number</label>
+            <input type="text" id="form1" class="form-control">
+          </form>
+          <button type="submit" class="btn btn-primary">CONFIRM PAYMENT</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('input[type="radio"]').click(function() {
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".payment-form").not(targetBox).hide();
+        $(targetBox).show();
+        console.log(inputValue);
+      })
+    })
+    </script>
+</div>

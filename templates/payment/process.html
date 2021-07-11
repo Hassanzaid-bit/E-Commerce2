@@ -1,0 +1,131 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="payment-container">
+    <div class="header">
+        {% include "common/header.html" %}
+    </div>
+    <div class="checkout-process">
+        <div>
+            <h4>1</h4>
+            <p>Shopping cart</p>
+        </div>
+        <div>
+            <h4>2</h4>
+            <p>Shipping details</p>
+        </div>
+        <div>
+            <h4>3</h4>
+            <p>Payment options</p>
+        </div>
+    </div>
+    <div class="payment">
+        <div class="radio-buttons">
+           <a href="{% url 'payment:braintree_process' %}"><input type="radio" name="radiobutton" value="mastercard" checked> <img src="{% static  'img/mastercard.png'%}" alt="" width="177px"></label></a> 
+            <a href="{% url 'payment:mpesa_process' %}"><input type="radio" name="radiobutton" value="mpesa"> <img src="{% static  'img/mpesa.png'%}" alt=""></label></a>    
+        </div>
+
+        <div class="mastercard payment-form">
+            <form method="POST" id="payment">
+
+                <label for="card-number">Card Number</label>
+                <div id="card-number" class="field" ></div>
+    
+                <label for="cvv">CVV</label>
+                <div id="cvv" class="field" ></div>
+    
+                <label for="expiration-date">Expiration Date</label>
+                <div id="expiration-date" class="field" ></div>
+    
+                <input type="hidden" name="payment_method_nonce" id="nonce" value="">
+                {% csrf_token %}
+    
+                <input type="submit" value="Pay">
+    
+            </form>
+        </div>
+
+        <div class="mpesa payment-form">
+            <form  id="mpesa" action="{% url 'payment:mpesa_process' %}" method="POST">
+                {{ Mpesaform.as_p }} 
+                {% csrf_token %}
+            
+                <input type="submit" value="pay">
+              </form> 
+    
+        </div>
+       
+    </div>    
+
+        
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('input[type="radio"]').click(function() {
+        var inputValue = $(this).attr("value");
+        var targetBox = $("." + inputValue);
+        $(".payment-form").not(targetBox).hide();
+        $(targetBox).show();
+        console.log(inputValue);
+      })
+    })
+    </script>
+
+
+    <script src="https://js.braintreegateway.com/web/3.58.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.58.0/js/hosted-fields.min.js"></script>
+
+    <script>
+        var form = document.querySelector('#payment');
+        var submit = document.querySelector('input[type="submit"]');
+
+        braintree.client.create({
+            authorization: '{{ client_token }}'
+        }, function (clientErr, clientInstance) {
+            if(clientErr){
+                console.error(clientErr)
+                return;
+            }
+
+            braintree.hostedFields.create({
+                client:clientInstance,
+                styles: {
+                    'input' : {'font-size': '13px'},
+                    'input.invalid' : {'color': 'red'},
+                    'input.valid' : {'color':'green'}
+                },
+                fields: {
+                    number: {selector: '#card-number'},
+                    cvv: {selector: '#cvv'},
+                    expirationDate: {selector: '#expiration-date'}
+                }
+            }, function (hostedFieldsErr, hostedFieldsInstance) {
+                if (hostedFieldsErr) {
+                    console.error(hostedFieldsErr);
+                    return;
+                }
+                submit.removeAttribute('disabled');
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+                        if (tokenizeErr) {
+                            console.error(tokenizeErr);
+                            return;
+                        }
+                        // set nonce to send to the server
+                        document.getElementById('nonce').value = payload.nonce;
+                        //submit form
+                        document.getElementById('payment').submit();
+                    });
+                }, false);
+            });
+        });
+    </script>
+</div>
+
+{% endblock %}
